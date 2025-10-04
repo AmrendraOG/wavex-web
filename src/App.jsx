@@ -68,8 +68,9 @@ const App = () => {
 
   return (
     <div className='h-screen flex flex-col'>
-      <div className='flex flex-row justify-center py-6 bg-cyan-950'>
+      <div className='flex flex-col justify-center text-center py-6 bg-cyan-950'>
         <p className='text-4xl text-cyan-400 font-extrabold'>WaveX</p>
+        <p className='text-sm text-cyan-600 font-extrabold'>By Amrendra Maurya</p>
       </div>
       <div className='main h-screen flex flex-row'>
         <div className='songsList w-96 bg-cyan-950 overflow-y-hidden p-8'>
@@ -83,7 +84,7 @@ const App = () => {
                   setPlayText(true);
                 }
                 }>
-                  <strong>{song.title}</strong>
+                  <strong>{song.title} - {song.artists}</strong>
                 </button>
               )
             })}

@@ -1,13 +1,26 @@
 import { useState, useRef, useEffect } from 'react'
-import { FaPlay, FaPause, FaStop, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa"
+import { FaPlay, FaPause, FaStop, FaAngleDoubleLeft, FaAngleDoubleRight, FaVolumeUp, FaVolumeMute } from "react-icons/fa"
 import songs from "./data/songs.json"
 
 const App = () => {
   const [playText, setPlayText] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [volume, setVolume] = useState(100);
+  const [isMute, setIsMute] = useState(false);
   const [currentSong, setCurrentSong] = useState(songs[0].title)
   const audioRef = useRef(new Audio(`https://github.com/AmrendraOG/wavex/raw/refs/heads/master/assets/songs/${currentSong}.mp3`));
   const [artwork, setArtwork] = useState(`https://raw.githubusercontent.com/AmrendraOG/wavex/refs/heads/master/assets/covers/${currentSong}.png`);
+
+  const handleVolume = (e) => {
+    const newVolume = e.target.value;
+    audioRef.current.volume = newVolume / 100;
+    setVolume(newVolume);
+  }
+
+  useEffect(() => {
+    setIsMute(volume === '0')
+  }, [volume]);
+
   const handleClick = () => {
     if (playText) {
       audioRef.current.pause();
@@ -82,6 +95,7 @@ const App = () => {
                   audioRef.current = new Audio(`https://github.com/AmrendraOG/wavex/raw/refs/heads/master/assets/songs/${currentSong}.mp3`);
                   setCurrentSong(song.title);
                   setPlayText(true);
+                  audioRef.current.volume = volume / 100;
                 }
                 }>
                   <strong>{song.title} - {song.artists}</strong>
@@ -127,6 +141,15 @@ const App = () => {
             >
               <FaAngleDoubleRight />
             </button>
+          </div>
+          <div className='volumeControl text-cyan-400 flex flex-row gap-2 accent-cyan-400'>
+            {isMute ? <FaVolumeMute /> : <FaVolumeUp />}
+            <input type="range"
+              min='0'
+              max='100'
+              value={volume}
+              onChange={handleVolume}
+            />
           </div>
         </div>
       </div>

@@ -91,7 +91,7 @@ const App = () => {
           <ul className='flex flex-col gap-4'>
             {songs.map((song, index) => {
               return (
-                <button key={index} className='p-2 rounded bg-cyan-700 text-white hover:bg-cyan-800' onClick={() => {
+                <button key={index} className={`bg-cyan-700 p-2 rounded  text-white hover:bg-cyan-800`} onClick={() => {
                   audioRef.current = new Audio(`https://github.com/AmrendraOG/wavex/raw/refs/heads/master/assets/songs/${currentSong}.mp3`);
                   setCurrentSong(song.title);
                   setPlayText(true);
@@ -106,7 +106,7 @@ const App = () => {
         </div>
 
         <div className='player flex-1 overflow-hidden bg-gray-900 flex flex-col justify-center items-center gap-8'>
-          <div className='artwork rounded w-80 h-80 bg-cyan-950 flex justify-center items-center'>
+          <div className='artwork rounded w-80 h-80 md:w-64 md:h-64 bg-cyan-950 flex justify-center items-center'>
             <img src={artwork} />
           </div>
           <div className='text-white text-3xl font-bold'>
